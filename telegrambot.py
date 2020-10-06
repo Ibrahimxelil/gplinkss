@@ -81,7 +81,7 @@ def link(update,context):
 	
 
 def shortlinks(api,link,category):
-	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+')
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'&ct='+str(category))
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
