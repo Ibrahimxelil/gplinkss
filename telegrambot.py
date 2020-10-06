@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Merhaba "+name+" 😃\nWelcome to [GPlinks.in]{https://bit.ly/33ActlU} shortener bot ,\nYou can use your [GPlinks.in]{https://bit.ly/33ActlU} account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Merhaba "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlinks.in account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
@@ -58,10 +58,7 @@ def apikey (update,context):
 	else:
 		update.message.reply_text("‼️You entered incorrect api token‼️\nEnter correct api token to continue to login")
 
-keyboard=[[InlineKeyboardButton("Movies/Series🎥", callback_data="5"), InlineKeyboardButton ("Sports/Football⚽",callback_data="4")],
-                      [InlineKeyboardButton ("Game/Download🎮",callback_data="3"), InlineKeyboardButton ("Adult content 18+🔞",callback_data="1")],
-                       [InlineKeyboardButton ("Other",callback_data="2")]]
-reply_markup = InlineKeyboardMarkup(keyboard)
+
 
 @run_async
 def link(update,context):
@@ -81,7 +78,7 @@ def link(update,context):
 	
 
 def shortlinks(api,link,category):
-	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'&ct='+str(category))
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+')
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
