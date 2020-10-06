@@ -58,10 +58,7 @@ def apikey (update,context):
 	else:
 		update.message.reply_text("‼️You entered incorrect api token‼️\nEnter correct api token to continue to login")
 
-keyboard=[[InlineKeyboardButton("Movies/Series🎥", callback_data="5"), InlineKeyboardButton ("Sports/Football⚽",callback_data="4")],
-                      [InlineKeyboardButton ("Game/Download🎮",callback_data="3"), InlineKeyboardButton ("Adult content 18+🔞",callback_data="1")],
-                       [InlineKeyboardButton ("Other",callback_data="2")]]
-reply_markup = InlineKeyboardMarkup(keyboard)
+
 
 @run_async
 def link(update,context):
