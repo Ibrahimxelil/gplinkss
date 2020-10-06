@@ -16,21 +16,21 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Merhaba "+name+" 😃\nMerhaba to tr.link shortener bot ,\nYou can use your tr.link account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Merhaba "+name+" 😃\nWelcome to [GPlinks.in]{https://bit.ly/33ActlU} shortener bot ,\nYou can use your [GPlinks.in]{https://bit.ly/33ActlU} account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
 	try:
 		apikey=context.user_data['apikey']
 		if len(apikey)==0:
-			update.message.reply_text("send your api token to login")
+			update.message.reply_text("Send your api token to login")
 			return apikeys
 		else:
 			update.message.reply_text("You are already Logged in \nTo logout use command /logout")
 		
 		
 	except KeyError:
-		update.message.reply_text("send your api token to login")
+		update.message.reply_text("Send your api token to login")
 		return apikeys
 	
 	
@@ -81,7 +81,7 @@ def link(update,context):
 	
 
 def shortlinks(api,link,category):
-	response = requests.get('https://ay.link/api/?api='+api+'&url='+link+'&ct='+str(category))
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'&ct='+str(category))
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
