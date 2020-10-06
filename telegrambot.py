@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Merhaba "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlinks.in account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Hi "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlinks.in account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
@@ -71,14 +71,14 @@ def link(update,context):
 			longlink=context.user_data['longlink']=[]
 			longlink.append(link)
 				
-			update.message.reply_text("Select category of your link by clicking on below buttons",reply_markup=reply_markup)
+			
 	except KeyError:
 		update.message.reply_text("Login first by command /login and then send your long link")
 	
 	
 
 def shortlinks(api,link,category):
-	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'&ct='+str(category))
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'+str())
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
