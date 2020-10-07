@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Hello "+name+" 😃\nWelcome to tr.link shortener bot ,\nYou can use your tr.link account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Hello "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlinks.in account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
@@ -79,7 +79,7 @@ def link(update,context):
 	
 
 def shortlinks(api,link):
-	response = requests.get('https://ay.link/api/?api='+api+'&url='+link)
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link)
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
