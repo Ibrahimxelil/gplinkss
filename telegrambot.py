@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Hi "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlinks.in account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Hello "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlink.in account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
@@ -59,7 +59,6 @@ def apikey (update,context):
 		update.message.reply_text("‼️You entered incorrect api token‼️\nEnter correct api token to continue to login")
 
 
-
 @run_async
 def link(update,context):
 	try:
@@ -68,8 +67,10 @@ def link(update,context):
 			update.message.reply_text("Login first by command /login and then send your long link")
 		else:
 			link=update.message.text
-			longlink=context.user_data['longlink']=[]
-			longlink.append(link)
+			apikey=context.user_data['apikey']
+			api=apikey[0]
+			shortlink=shortlinks(api,link)
+			update.message.reply_text("Your Short link is 👇\n"+shortlink)
 				
 			
 	except KeyError:
@@ -77,25 +78,12 @@ def link(update,context):
 	
 	
 
-def shortlinks(api,link,category):
-	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link+'+str(category))
+def shortlinks(api,link):
+	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link)
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
 	return shortlink
-	
-@run_async
-def button (update, context):
-	apikey=context.user_data['apikey']
-	longlink=context.user_data['longlink']
-	query=update.callback_query
-	query.answer()
-	category=query.data
-	api=apikey[0]
-	link=longlink[0]
-	shortlink=shortlinks(api,link,category)
-	query.edit_message_text("Your Short link is 👇\n"+shortlink)
-	
 	
 def cancel(update, context):
 	update.message.reply_text('Current Operation cancelled')
@@ -129,3 +117,6 @@ def main():
 	
 if __name__=="__main__":
 	main()
+
+
+
