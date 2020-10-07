@@ -108,7 +108,7 @@ def main():
     )
     dp.add_handler(CommandHandler('start',start))
     dp.add_handler(CommandHandler('logout',logout))
-    dp.add_handler(CallbackQueryHandler (button))
+
     dp.add_handler(conv_handler)
     dp.add_handler(MessageHandler(Filters.text,link))
     updater.start_polling()
