@@ -16,21 +16,21 @@ logger = logging.getLogger(__name__)
 @run_async
 def start(update,context):
 	name=update.message.chat.first_name
-	update.message.reply_text("Hello "+name+" 😃\nWelcome to GPlinks.in shortener bot ,\nYou can use your GPlink.in account using this bot.\nTo use this bot first login by using command /login")
+	update.message.reply_text("Hello "+name+" 😃\nWelcome to tr.link shortener bot ,\nYou can use your tr.link account using this bot.\nTo use this bot first login by using command /login")
 
 @run_async
 def login(update,context):
 	try:
 		apikey=context.user_data['apikey']
 		if len(apikey)==0:
-			update.message.reply_text("Send your api token to login")
+			update.message.reply_text("send your api token to login")
 			return apikeys
 		else:
 			update.message.reply_text("You are already Logged in \nTo logout use command /logout")
 		
 		
 	except KeyError:
-		update.message.reply_text("Send your api token to login")
+		update.message.reply_text("send your api token to login")
 		return apikeys
 	
 	
@@ -79,7 +79,7 @@ def link(update,context):
 	
 
 def shortlinks(api,link):
-	response = requests.get('https://gplinks.in/api/?api='+api+'&url='+link)
+	response = requests.get('https://ay.link/api/?api='+api+'&url='+link)
 	print(response)
 	data=response.json()
 	shortlink=data['shortenedUrl']
@@ -92,8 +92,8 @@ def cancel(update, context):
 	
 persistence=PicklePersistence('data')
 def main():
-    token=os.environ.get("BOT_TOKEN", "")
-    updater = Updater(token,use_context=True, persistence=persistence)
+    #token=os.environ.get("BOT_TOKEN", "")
+    updater = Updater("852476985:AAFkO6QkhNxS6QuWrqDaQidHXvutW_cdfKA",use_context=True, persistence=persistence)
     dp=updater.dispatcher
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('login', login)],
@@ -117,6 +117,4 @@ def main():
 	
 if __name__=="__main__":
 	main()
-
-
 
